@@ -10,7 +10,7 @@
 	<packaging>jar</packaging>
 
 	<name>spring-boot-camel-soap-consume</name>
-	
+
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -65,11 +65,15 @@
 				<configuration>
 					<schemaLanguage>WSDL</schemaLanguage>
 					<generatePackage>hello.wsdl</generatePackage>
-					<schemas>
-						<schema>
-							<url>http://www.webservicex.com/stockquote.asmx?WSDL</url>
-						</schema>
-					</schemas>
+					<schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
+					<schemaIncludes>
+                        <include>quote.wsdl</include>
+                    </schemaIncludes>
+<!-- 					<schemas> -->
+<!-- 						<schema> -->
+<!-- 							<url>http://www.webservicex.com/stockquote.asmx?WSDL</url> -->
+<!-- 						</schema> -->
+<!-- 					</schemas> -->
 				</configuration>
 			</plugin>
 		</plugins>

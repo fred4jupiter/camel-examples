@@ -23,7 +23,7 @@ public class QuoteClientIT {
 
 	@Test
 	public void callQuoteClient() {
-		String ticker = "MSFT";
+		String ticker = "ORCL";
 
 		GetQuoteResponse response = quoteClient.getQuote(ticker);
 		assertNotNull(response);
