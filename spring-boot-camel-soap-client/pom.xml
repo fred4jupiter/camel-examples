@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.fred4jupiter.springbootcamelsoapconsume</groupId>
-	<artifactId>spring-boot-camel-soap-consume</artifactId>
+	<artifactId>spring-boot-camel-soap-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
@@ -64,20 +64,13 @@
 				</executions>
 				<configuration>
 					<schemaLanguage>WSDL</schemaLanguage>
-					<generatePackage>hello.wsdl</generatePackage>
+					<generatePackage>countries.wsdl</generatePackage>
 					<schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
 					<schemaIncludes>
-                        <include>quote.wsdl</include>
+                        <include>countries.wsdl</include>
                     </schemaIncludes>
-<!-- 					<schemas> -->
-<!-- 						<schema> -->
-<!-- 							<url>http://www.webservicex.com/stockquote.asmx?WSDL</url> -->
-<!-- 						</schema> -->
-<!-- 					</schemas> -->
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
