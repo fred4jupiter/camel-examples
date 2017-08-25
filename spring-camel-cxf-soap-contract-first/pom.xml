@@ -5,7 +5,9 @@
 	<groupId>com.camelinaction</groupId>
 	<artifactId>spring-camel-cxf-soap-contract-first</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
+
+	<packaging>jar</packaging>
+
 	<name>Camel in Action 2 :: Chapter 10 :: CXF Contract First</name>
 
 	<properties>
@@ -13,6 +15,7 @@
 		<log4j-version>1.2.17</log4j-version>
 		<slf4j-version>1.7.21</slf4j-version>
 		<cxf-version>3.1.11</cxf-version>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
 	</properties>
 
 	<dependencyManagement>
