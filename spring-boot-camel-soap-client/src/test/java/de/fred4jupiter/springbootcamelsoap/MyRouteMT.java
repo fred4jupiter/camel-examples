@@ -1,0 +1,37 @@
+package de.fred4jupiter.springbootcamelsoap;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.apache.camel.EndpointInject;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.camel.test.spring.CamelSpringBootRunner;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@RunWith(CamelSpringBootRunner.class)
+@SpringBootTest
+public class MyRouteMT {
+
+	@EndpointInject(uri = "direct:countries")
+	private ProducerTemplate simpleRouteStartEndpoint;
+
+	@EndpointInject(uri = "mock:end")
+	private MockEndpoint resultEndpoint;
+
+	@Before
+	public void checkInjection() {
+		assertNotNull(simpleRouteStartEndpoint);
+	}
+
+	@Test
+	public void triggerRouteWithoutHeader() throws Exception {
+		simpleRouteStartEndpoint.sendBody("Spain");
+
+		resultEndpoint.expectedMessageCount(1);
+		resultEndpoint.allMessages().body().isEqualTo("Madrid");
+		resultEndpoint.assertIsSatisfied();
+	}
+}
