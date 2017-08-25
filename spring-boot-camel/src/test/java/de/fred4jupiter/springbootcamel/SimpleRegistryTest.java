@@ -20,13 +20,13 @@ public class SimpleRegistryTest {
 	@Before
 	public void setUp() throws Exception {
 		SimpleRegistry registry = new SimpleRegistry();
-		registry.put("bodyEnricherProcessor", new BodyEnricherProcessor());
+		registry.put("simpleProcessor", new SimpleProcessor());
 		context = new DefaultCamelContext(registry);
 		template = context.createProducerTemplate();
 		template.setDefaultEndpointUri("direct:hello");
 		context.addRoutes(new RouteBuilder() {
 			public void configure() throws Exception {
-				from("direct:hello").bean("bodyEnricherProcessor");
+				from("direct:hello").bean("simpleProcessor");
 			}
 		});
 		context.start();

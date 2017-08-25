@@ -8,7 +8,7 @@ public class SimpleRoute extends SpringRouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from("{{simpleRoute.start}}").bean(BodyEnricherProcessor.class).to("{{simpleRoute.end}}");
+		from("{{simpleRoute.start}}").bean("simpleProcessor").to("{{simpleRoute.end}}");
 	}
 
 }
