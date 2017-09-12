@@ -10,6 +10,12 @@ import java.io.File;
 
 public class ProcessFileTest extends CamelTestSupport {
 
+	public void setUp() throws Exception {
+		super.setUp();
+		deleteDirectory("target/in");
+		deleteDirectory("target/out");
+	}
+
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception {
 		return new MyRoute();
