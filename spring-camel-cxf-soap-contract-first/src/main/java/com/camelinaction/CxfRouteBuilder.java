@@ -1,7 +1,9 @@
 package com.camelinaction;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CxfRouteBuilder extends RouteBuilder {
 
 	@Override

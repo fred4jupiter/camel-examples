@@ -11,12 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import camelinaction.order.OrderEndpoint;
 
 @Configuration
-@ComponentScan("com.camelinaction")
-// @ImportResource({ "classpath:META-INF/cxf/cxf.xml" })
+@ComponentScan
 public class CamelCxfConfig {
-
-	// @Autowired
-	// private Bus cxfBus;
 
 	@Bean
 	public CamelContext camelContext(ApplicationContext applicationContext, CxfRouteBuilder cxfRouteBuilder)
@@ -36,8 +32,4 @@ public class CamelCxfConfig {
 		return endpoint;
 	}
 
-	@Bean
-	public CxfRouteBuilder cxfRouteBuilder() {
-		return new CxfRouteBuilder();
-	}
 }
