@@ -10,7 +10,7 @@ public class Application {
 
     public static void main(String[] args) throws Exception {
         CamelContext context = new DefaultCamelContext();
-        context.addRoutes(new MyRoute());
+        context.addRoutes(new MyRouteBuilder());
 
         context.start();
         while (Thread.activeCount() > 1) {

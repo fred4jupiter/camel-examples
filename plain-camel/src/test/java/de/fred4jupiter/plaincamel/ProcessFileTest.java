@@ -18,7 +18,7 @@ public class ProcessFileTest extends CamelTestSupport {
 
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception {
-		return new MyRoute();
+		return new MyRouteBuilder();
 	}
 
 	@Test

@@ -5,7 +5,7 @@ import org.apache.camel.builder.RouteBuilder;
 /**
  * Created by michael on 12.09.2017.
  */
-public class MyRoute extends RouteBuilder {
+public class MyRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
