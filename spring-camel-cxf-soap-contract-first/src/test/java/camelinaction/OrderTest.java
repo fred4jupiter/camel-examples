@@ -10,6 +10,8 @@ import org.springframework.context.support.AbstractApplicationContext;
 
 import com.camelinaction.CamelCxfConfig;
 
+import camelinaction.order.Order;
+
 public class OrderTest extends CamelSpringTestSupport {
 
 	@Override
@@ -24,8 +26,13 @@ public class OrderTest extends CamelSpringTestSupport {
 		params.add(1);
 		params.add("honda");
 
+		Order order = new Order();
+		order.setPartName("motor");
+		order.setAmount(1);
+		order.setCustomerName("honda");
+
 		// sends the order to the CXF endpoint (webservice)
-		String reply = template.requestBody("cxf:bean:orderEndpoint", params, String.class);
+		String reply = template.requestBody("cxf:bean:orderEndpoint", order, String.class);
 		assertEquals("OK", reply);
 	}
 
