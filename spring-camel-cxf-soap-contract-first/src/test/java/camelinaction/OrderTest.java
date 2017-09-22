@@ -1,8 +1,5 @@
 package camelinaction;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -24,17 +21,12 @@ public class OrderTest extends CamelSpringTestSupport {
 
 	@Test
 	public void testOrderOk() throws Exception {
-		List<Object> params = new ArrayList<Object>();
-		params.add("motor");
-		params.add(1);
-		params.add("honda");
-
 		Order order = new Order();
 		order.setPartName("motor");
 		order.setAmount(1);
 		order.setCustomerName("honda");
 
-		// sends the order to the CXF endpoint (webservice)
+		// calls the web service directly (no route processing)
 		String reply = template.requestBody("cxf:bean:orderEndpoint", order, String.class);
 		assertEquals("OK", reply);
 	}
