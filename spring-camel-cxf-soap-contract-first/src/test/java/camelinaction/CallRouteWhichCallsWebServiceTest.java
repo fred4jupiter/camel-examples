@@ -1,5 +1,6 @@
 package camelinaction;
 
+import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -23,9 +24,14 @@ public class CallRouteWhichCallsWebServiceTest extends CamelSpringTestSupport {
 		order.setAmount(1);
 		order.setCustomerName("honda");
 
+		MockEndpoint mockEndpoint = getMockEndpoint("mock:end2");
+		mockEndpoint.expectedMessageCount(1);
+
 		// sends the order to the CXF endpoint (webservice)
 		String reply = template.requestBody("direct:callWebService", order, String.class);
 		assertEquals("OK", reply);
+
+		mockEndpoint.assertIsSatisfied();
 	}
 
 }
