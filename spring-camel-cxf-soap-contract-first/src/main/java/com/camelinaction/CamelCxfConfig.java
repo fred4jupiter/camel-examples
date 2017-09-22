@@ -22,6 +22,7 @@ public class CamelCxfConfig {
 		return context;
 	}
 
+	// cxf:bean:orderEndpoint
 	@Bean
 	public CxfEndpoint orderEndpoint(CamelContext camelContext) {
 		CxfEndpoint endpoint = new CxfEndpoint();

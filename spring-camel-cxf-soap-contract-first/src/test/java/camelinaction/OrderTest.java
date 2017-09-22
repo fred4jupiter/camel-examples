@@ -12,6 +12,9 @@ import com.camelinaction.CamelCxfConfig;
 
 import camelinaction.order.Order;
 
+/*
+ * Started den camel context und damit auch die Route.
+ */
 public class OrderTest extends CamelSpringTestSupport {
 
 	@Override
