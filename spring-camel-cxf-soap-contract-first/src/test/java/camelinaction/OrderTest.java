@@ -1,6 +1,8 @@
 package camelinaction;
 
 import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.cxf.message.MessageContentsList;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -34,6 +36,14 @@ public class OrderTest extends CustomCamelSpringTestSupport {
 		assertEquals("OK", reply);
 
 		mockEndpoint.assertIsSatisfied();
+
+		Object messageContentsListObject = mockEndpoint.getExchanges().get(0).getIn().getBody();
+		assertNotNull(messageContentsListObject);
+		MessageContentsList messageContentsList = (MessageContentsList) messageContentsListObject;
+		Order receivedOrder = (Order) messageContentsList.get(0);
+
+		assertNotNull(receivedOrder);
+		System.out.println("body: " + ReflectionToStringBuilder.reflectionToString(receivedOrder));
 	}
 
 }
