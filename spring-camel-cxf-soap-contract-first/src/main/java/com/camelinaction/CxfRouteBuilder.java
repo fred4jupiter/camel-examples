@@ -1,25 +1,15 @@
 package com.camelinaction;
 
-import camelinaction.order.Order;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.cxf.DataFormat;
-import org.apache.camel.dataformat.soap.name.QNameStrategy;
-import org.apache.camel.dataformat.soap.name.ServiceInterfaceStrategy;
-import org.apache.camel.dataformat.soap.name.TypeNameStrategy;
-import org.apache.camel.model.DataFormatDefinition;
-import org.apache.camel.model.dataformat.JaxbDataFormat;
-import org.apache.camel.model.dataformat.SoapJaxbDataFormat;
 import org.springframework.stereotype.Component;
 
-import javax.xml.namespace.QName;
 
 @Component
 public class CxfRouteBuilder extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		// expose web service / consumer
-        getContext().setTracing(false);
+		// expose web service
 
 		from("cxf:bean:orderEndpoint")
                 .transform().simple("${body[0]}")
