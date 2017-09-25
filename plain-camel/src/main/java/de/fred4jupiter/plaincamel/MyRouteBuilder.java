@@ -14,7 +14,8 @@ public class MyRouteBuilder extends RouteBuilder {
 
 		from("direct:inbox").bean(BodyProcessor.class).wireTap("jms:queue:backup").to("file://target/out");
 
-		from("jms:queue:backup").setHeader(Exchange.FILE_NAME, simple("${file:name.noext}-${date:now:yyyyMMddHHmmssSSS}.${file:ext}"))
+		from("jms:queue:backup")
+				.setHeader(Exchange.FILE_NAME, simple("${file:name.noext}-${date:now:yyyyMMddHHmmssSSS}.${file:ext}"))
 				.to("file://target/backup");
 	}
 }

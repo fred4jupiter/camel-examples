@@ -39,9 +39,7 @@ public class ProcessFileTest extends CamelTestSupport {
 
 	@Override
 	protected CamelContext createCamelContext() throws Exception {
-		CamelContext context = CamelContextCreator.createCamelContext();
-		// context.setTracing(true);
-		return context;
+		return CamelContextCreator.createCamelContext();
 	}
 
 	@Override
