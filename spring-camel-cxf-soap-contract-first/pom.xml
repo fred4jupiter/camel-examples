@@ -8,7 +8,6 @@
 
 	<packaging>jar</packaging>
 
-	<name>Camel in Action 2 :: Chapter 10 :: CXF Contract First</name>
 
 	<properties>
 		<camel-version>2.19.2</camel-version>
@@ -111,7 +110,7 @@
 								<wsdlOption>
 									<wsdl>${basedir}/src/main/resources/wsdl/order.wsdl</wsdl>
 									<extraargs>
-										<extraarg>-impl</extraarg>
+
 									</extraargs>
 								</wsdlOption>
 							</wsdlOptions>
@@ -119,6 +118,25 @@
 						<goals>
 							<goal>wsdl2java</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/target/generated/src/main/java</source>
+							</sources>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

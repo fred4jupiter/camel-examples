@@ -9,7 +9,7 @@
 
 	<packaging>jar</packaging>
 
-	<name>spring-boot-camel-soap-consume</name>
+	<name>spring-boot-camel-soap-client</name>
 
 	<description>Demo project for Spring Boot</description>
 
