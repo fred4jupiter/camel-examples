@@ -1,12 +1,13 @@
 package de.fred4jupiter.plaincamel;
 
+import java.io.File;
+
+import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-
-import java.io.File;
 
 public class ProcessFileTest extends CamelTestSupport {
 
@@ -14,6 +15,11 @@ public class ProcessFileTest extends CamelTestSupport {
 		super.setUp();
 		deleteDirectory("target/in");
 		deleteDirectory("target/out");
+	}
+
+	@Override
+	protected CamelContext createCamelContext() throws Exception {
+		return CamelContextCreator.createCamelContext();
 	}
 
 	@Override
