@@ -1,7 +1,6 @@
 package camelinaction;
 
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -13,29 +12,7 @@ import camelinaction.order.Order;
 /*
  * Started den camel context und damit auch die Route.
  */
-public class OrderTest extends CamelSpringTestSupport {
-
-	// @Override
-	// public boolean isUseDebugger() {
-	// return true;
-	// }
-	//
-	// @Override
-	// protected void debugBefore(Exchange exchange, Processor processor,
-	// ProcessorDefinition<?> definition, String id,
-	// String shortName) {
-	// log.info("MyDebugger: before " + definition + " with body " +
-	// exchange.getIn().getBody());
-	// }
-	//
-	// @Override
-	// protected void debugAfter(Exchange exchange, Processor processor,
-	// ProcessorDefinition<?> definition, String id,
-	// String label, long timeTaken) {
-	// log.info("MyDebugger: after " + definition + " took " + timeTaken + " ms,
-	// with body "
-	// + exchange.getIn().getBody());
-	// }
+public class OrderTest extends CustomCamelSpringTestSupport {
 
 	@Override
 	protected AbstractApplicationContext createApplicationContext() {

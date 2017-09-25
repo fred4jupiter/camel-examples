@@ -8,6 +8,6 @@ public class StartApplication {
 	public static void main(String[] args) throws Exception {
 		Main main = new Main();
 		main.setApplicationContext(new AnnotationConfigApplicationContext(CamelCxfConfig.class));
-		main.start();
+		main.run();
 	}
 }
