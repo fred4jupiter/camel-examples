@@ -1,0 +1,95 @@
+Snippets camel plain Beispiel
+-----------------------------------------------------
+
+public class Application {
+
+	public static void main(String[] args) throws Exception {
+		Main main = new Main();
+
+		main.bind("jms", ComponentCreator.createJmsComponent());
+		main.addRouteBuilder(new MyRouteBuilder());
+
+		main.run();
+	}
+}
+
+
+---------------------
+
+public class MyRouteBuilder extends RouteBuilder {
+
+	@Override
+	public void configure() throws Exception {
+		// errorHandler(deadLetterChannel("file://target/dead"));
+
+		from("file://target/in?autoCreate=true").log("This is the body: ${body}").to("direct:inbox");
+
+		from("direct:inbox").bean(BodyProcessor.class).wireTap("jms:queue:backup").to("file://target/out");
+
+		from("jms:queue:backup")
+				.setHeader(Exchange.FILE_NAME, simple("${file:name.noext}-${date:now:yyyyMMddHHmmssSSS}.${file:ext}"))
+				.to("file://target/backup");
+	}
+}
+
+
+---------------------
+
+
+public class BodyProcessor {
+
+	private static final Logger LOG = LoggerFactory.getLogger(BodyProcessor.class);
+
+	@Handler
+	public void enrichBody(@Header("CamelFileName") String fileName, @Body String body, Exchange exchange) {
+		LOG.debug("filename: {}", fileName);
+
+		String newBody = body + ", filename: " + fileName;
+		exchange.getIn().setBody(newBody);
+	}
+}
+
+
+------------------
+
+public class ComponentCreator {
+
+	public static JmsComponent createJmsComponent() {
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://localhost?broker.persistent=false");
+		return JmsComponent.jmsComponentAutoAcknowledge(connectionFactory);
+	}
+}
+
+-----------------
+
+public class ProcessFileTest extends CamelTestSupport {
+
+	public void setUp() throws Exception {
+		super.setUp();
+		deleteDirectory("target/in");
+		deleteDirectory("target/out");
+	}
+
+	@Override
+	protected CamelContext createCamelContext() throws Exception {
+		CamelContext context = new DefaultCamelContext();
+		context.addComponent("jms", ComponentCreator.createJmsComponent());
+		return context;
+	}
+
+	@Override
+	protected RouteBuilder createRouteBuilder() throws Exception {
+		return new MyRouteBuilder();
+	}
+
+	@Test
+	public void moveFileAndCheckContent() throws Exception {
+		template.sendBodyAndHeader("file://target/in", "Hello World", Exchange.FILE_NAME, "ehello.txt");
+		Thread.sleep(2000);
+		File target = new File("target/out/hello.txt");
+		assertTrue("File not moved", target.exists());
+
+		String fileContent = FileUtils.readFileToString(target);
+		assertEquals("Hello World, filename: hello.txt", fileContent);
+	}
+}
