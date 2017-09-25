@@ -1,0 +1,9 @@
+im RouteBuilder:
+
+errorHandler(deadLetterChannel("file://target/dead").onExceptionOccurred(new Processor() {
+
+			@Override
+			public void process(Exchange exchange) throws Exception {
+				LOG.error(exchange.getException().getMessage());
+			}
+		}));
