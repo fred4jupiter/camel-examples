@@ -1,8 +1,9 @@
 package camelinaction;
 
+import static org.hamcrest.core.IsEqual.equalTo;
+
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.cxf.message.MessageContentsList;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -10,8 +11,6 @@ import org.springframework.context.support.AbstractApplicationContext;
 import com.camelinaction.CamelCxfConfig;
 
 import camelinaction.order.Order;
-
-import static org.hamcrest.core.IsEqual.equalTo;
 
 /*
  * Started den camel context und damit auch die Route.
@@ -39,10 +38,10 @@ public class OrderTest extends CustomCamelSpringTestSupport {
 
 		mockEndpoint.assertIsSatisfied();
 
-		Order receivedOrder = (Order)  mockEndpoint.getExchanges().get(0).getIn().getBody();
+		Order receivedOrder = (Order) mockEndpoint.getExchanges().get(0).getIn().getBody();
 		assertNotNull(receivedOrder);
 
-		assertThat(order.getPartName(),equalTo("motor"));
+		assertThat(order.getPartName(), equalTo("motor"));
 		System.out.println("body: " + ReflectionToStringBuilder.reflectionToString(receivedOrder));
 	}
 
