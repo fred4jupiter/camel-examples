@@ -11,9 +11,7 @@ public class CountriesConfiguration {
 	@Bean
 	public Jaxb2Marshaller marshaller() {
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-		// this package must match the package in the <generatePackage> specified in
-		// pom.xml
-		marshaller.setContextPath("countries.wsdl");
+		marshaller.setPackagesToScan("de.fred4jupiter.springbootcamelsoap");
 		return marshaller;
 	}
 

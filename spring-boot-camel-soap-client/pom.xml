@@ -70,7 +70,7 @@
 				</executions>
 				<configuration>
 					<schemaLanguage>WSDL</schemaLanguage>
-					<generatePackage>countries.wsdl</generatePackage>
+					<generatePackage>de.fred4jupiter.springbootcamelsoap</generatePackage>
 					<schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
 					<schemaIncludes>
                         <include>countries.wsdl</include>

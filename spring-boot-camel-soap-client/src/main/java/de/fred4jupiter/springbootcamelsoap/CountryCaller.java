@@ -5,9 +5,6 @@ import org.apache.camel.Processor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import countries.wsdl.Country;
-import countries.wsdl.GetCountryResponse;
-
 @Component
 public class CountryCaller implements Processor {
 
