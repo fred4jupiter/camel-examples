@@ -1,30 +1,26 @@
 package de.fred4jupiter.springbootcamel;
 
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
+import org.apache.camel.Handler;
+import org.apache.camel.Header;
+import org.apache.camel.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SimpleProcessor implements Processor {
+public class SimpleProcessor {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SimpleProcessor.class);
 
-	public SimpleProcessor() {
-		// System.err.println("Created class: " + Thread.currentThread().getId());
-	}
-
-	@Override
-	public void process(Exchange exchange) throws Exception {
-		LOG.debug("exchange: {}", exchange);
-
-		String name = exchange.getIn().getHeader("name", String.class);
+	@Handler
+	public void process(@Header("name") String name, Message message) throws Exception {
+		LOG.debug("message: {}", message);
 
 		if (name != null) {
-			exchange.getIn().setBody("Hello " + name);
+			message.setBody("Hello " + name);
 		} else {
-			exchange.getIn().setBody("Hello World");
+
+			message.setBody("Hello World");
 		}
 	}
 
