@@ -11,11 +11,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles("test")
 @RunWith(CamelSpringBootRunner.class)
-@SpringBootTest
+@SpringBootTest(properties = { "simpleRoute.start=direct:start", "simpleRoute.end=mock:end" })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class SimpleRouteTest {
 
