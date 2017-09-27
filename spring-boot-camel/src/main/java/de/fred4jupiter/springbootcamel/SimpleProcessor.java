@@ -19,7 +19,6 @@ public class SimpleProcessor {
 		if (name != null) {
 			message.setBody("Hello " + name);
 		} else {
-
 			message.setBody("Hello World");
 		}
 	}

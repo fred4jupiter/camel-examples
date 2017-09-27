@@ -32,19 +32,21 @@ public class SimpleRouteTest {
 
 	@Test
 	public void triggerRouteWithoutHeader() throws Exception {
-		simpleRouteStartEndpoint.sendBody("");
-
 		resultEndpoint.expectedMessageCount(1);
 		resultEndpoint.allMessages().body().isEqualTo("Hello World");
+
+		simpleRouteStartEndpoint.sendBody("");
+
 		resultEndpoint.assertIsSatisfied();
 	}
 
 	@Test
 	public void triggerRouteWithHeader() throws Exception {
-		simpleRouteStartEndpoint.sendBodyAndHeader("", "name", "Michael");
-
 		resultEndpoint.expectedMessageCount(1);
 		resultEndpoint.allMessages().body().isEqualTo("Hello Michael");
+
+		simpleRouteStartEndpoint.sendBodyAndHeader("", "name", "Michael");
+
 		resultEndpoint.assertIsSatisfied();
 	}
 }
