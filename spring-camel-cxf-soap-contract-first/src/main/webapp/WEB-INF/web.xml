@@ -6,8 +6,38 @@
 
     <!-- setup Spring listener which loads the Spring XML file -->
     <!-- this is standard way of doing this with Spring and no special things you need to do to use Camel -->
+
+    <!--
+     <listener>
+         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+     </listener>
+ -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <!-- Configure DispatcherServlet to use JavaConfigWebApplicationContext
+         instead of the default XmlWebApplicationContext -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>com.camelinaction.CamelCxfConfig</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>CXFServlet</servlet-name>
+        <servlet-class>
+            org.apache.cxf.transport.servlet.CXFServlet
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CXFServlet</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
+    <!-- Again, config locations must consist of one or more comma- or space-delimited
+         and fully-qualified @Configuration classes -->
 </web-app>
