@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class SimpleRoute extends SpringRouteBuilder {
 
-	@Override
-	public void configure() throws Exception {
-		from("{{simpleRoute.start}}").bean("simpleProcessor").to("{{simpleRoute.end}}");
-	}
+    @Override
+    public void configure() {
+        from("{{simpleRoute.start}}").bean(SimpleProcessor.class).to("{{simpleRoute.end}}");
+
+    }
 
 }
